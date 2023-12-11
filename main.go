@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -60,6 +62,7 @@ func createBooks(w http.ResponseWriter, r *http.Request) {
 
 	var book Book
 	json.NewDecoder(r.Body).Decode(&book)
+	book.ID = strconv.Itoa(rand.Intn(100000000))
 	books = append(books, book)
 	json.NewEncoder(w).Encode(book)
 }
